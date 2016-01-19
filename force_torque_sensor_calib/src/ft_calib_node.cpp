@@ -43,6 +43,7 @@
 #include <tf_conversions/tf_eigen.h>
 #include <eigen_conversions/eigen_msg.h>
 #include <geometry_msgs/Pose.h>
+#include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/WrenchStamped.h>
 #include <sensor_msgs/Imu.h>
 #include <pr2_msgs/AccelerometerState.h>
@@ -264,6 +265,12 @@ public:
 			{
 				m_group->setRandomTarget();
 				ROS_INFO("Executing pose %d",m_pose_counter);
+				/*
+				// TODO print pose
+				geometry_msgs::PoseStamped p = m_group->getPoseTarget();
+				std::cout<<"pose"<<m_pose_counter<<": ["
+						 <<p.pose.position.x<<","<<p.pose.position.y<<","<<p.pose.position.z<<", ]\n";
+			    */
 			}
 
 			else
