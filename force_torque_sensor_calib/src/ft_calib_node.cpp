@@ -45,6 +45,7 @@
 #include <geometry_msgs/Pose.h>
 #include <geometry_msgs/WrenchStamped.h>
 #include <sensor_msgs/Imu.h>
+#include <pr2_msgs/AccelerometerState.h>
 #include <moveit/move_group_interface/move_group.h>
 #include <force_torque_sensor_calib/ft_calib.h>
 #include <eigen3/Eigen/Core>
@@ -386,7 +387,8 @@ public:
 
 
 	// gets readings from accelerometer and transforms them to the FT sensor frame
-	void topicCallback_imu(const sensor_msgs::Imu::ConstPtr &msg)
+//	void topicCallback_imu(const sensor_msgs::Imu::ConstPtr &msg)
+	void topicCallback_imu(const pr2_msgs::AccelerometerState::ConstPtr &msg)
 	{
 		ROS_DEBUG("In accelerometer read callback");
 
@@ -424,7 +426,10 @@ public:
 		geometry_msgs::Vector3Stamped gravity;
 		gravity.header.stamp = ros::Time();
 		gravity.header.frame_id = m_imu.header.frame_id;
-		gravity.vector = m_imu.linear_acceleration;
+//		gravity.vector = m_imu.linear_acceleration;
+		gravity.vector.x = m_imu.samples[0].x;
+		gravity.vector.y = m_imu.samples[0].y;
+		gravity.vector.z = m_imu.samples[0].z;
 
 		geometry_msgs::Vector3Stamped gravity_ft_frame;
 
@@ -517,7 +522,8 @@ private:
 	geometry_msgs::WrenchStamped m_ft_avg; // average over 100 measurements
 
 	// accelerometer readings
-	sensor_msgs::Imu m_imu;
+//	sensor_msgs::Imu m_imu;
+	pr2_msgs::AccelerometerState m_imu;
 
 	tf::TransformListener *m_tf_listener;
 
