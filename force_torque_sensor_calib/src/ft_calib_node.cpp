@@ -382,6 +382,7 @@ public:
 	{
 		ROS_DEBUG("In ft sensorcallback");
 		m_ft_raw = *msg;
+		m_ft_raw.header.frame_id="l_force_torque_link";		// TODO make this a parameter
 		m_received_ft = true;
 	}
 
