@@ -246,6 +246,11 @@ public:
 
 	void topicCallback_ft_raw(const geometry_msgs::WrenchStamped::ConstPtr &msg)
 	{
+		geometry_msgs::WrenchStamped tmp;
+		tmp.header.stamp = ros::Time();
+		tmp.header.frame_id = "l_force_torque_link";
+		tmp.wrench = msg->wrench;
+
 		static int error_msg_count=0;
 
 		if(!m_received_imu)
@@ -262,7 +267,7 @@ public:
 		}
 
 		geometry_msgs::WrenchStamped ft_zeroed;
-		m_g_comp->Zero(*msg, ft_zeroed);
+		m_g_comp->Zero(tmp, ft_zeroed);
 		topicPub_ft_zeroed_.publish(ft_zeroed);
 
 		geometry_msgs::WrenchStamped ft_compensated;
