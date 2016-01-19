@@ -233,9 +233,14 @@ public:
 		return true;
 	}
 
-	void topicCallback_imu(const sensor_msgs::Imu::ConstPtr &msg)
+	void topicCallback_imu(const pr2_msgs::AccelerometerState::ConstPtr &msg)
 	{
-		m_imu = *msg;
+		pr2_msgs::AccelerometerState tmp = *msg;
+		m_imu.header = tmp.header;
+		m_imu.linear_acceleration.x = tmp.samples[0].x;
+		m_imu.linear_acceleration.y = tmp.samples[0].y;
+		m_imu.linear_acceleration.z = tmp.samples[0].z;
+		//m_imu = *msg;
 		m_received_imu = true;
 	}
 

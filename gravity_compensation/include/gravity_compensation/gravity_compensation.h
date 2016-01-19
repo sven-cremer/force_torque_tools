@@ -40,6 +40,7 @@
 #include <tf/transform_datatypes.h>
 #include <geometry_msgs/WrenchStamped.h>
 #include <sensor_msgs/Imu.h>
+#include <pr2_msgs/AccelerometerState.h>
 
 
 class GravityCompensation

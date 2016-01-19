@@ -30,4 +30,7 @@
   <run_depend>eigen</run_depend>
   <run_depend>eigen_conversions</run_depend>
 
+  <build_depend>pr2_msgs</build_depend>
+  <run_depend>pr2_msgs</run_depend>
+
 </package>
